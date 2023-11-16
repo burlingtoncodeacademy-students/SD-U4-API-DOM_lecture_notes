@@ -1,32 +1,38 @@
-//! Spoonacular
+//! Concepts to Consider
 /* 
-    - An API to help us build our project, a meal lister where users can select a random recipe to add to our own recipe deck.
-    - This is a free API
-    - Will need to create an account
-        - Some APIs require this to manage how data is gathered and flows.
-        - Also allows for control on how many times a request can be made.
-        - Depends on the developer and what they require. This typically can be found in the documentation.
+    - When a user clicks the "Random" button
+        - A card is generated
+
+    - A single card displayed needs
+        - An image, a title, and a button.
+        - The button will add that recipe to a collection of recipes.
+            - This collection will be stored in this file.
+    
+    - When a recipe is added to the collection
+        - A "deck" of cards will display.
+            - Each card will display:
+                - An image, a title, a hyperlink to the recipe details.
+
+    - Need variables to target elements on the html document.
+    - Need event listeners to respond to user interaction
+    - Need functions to handle both the single card and deck of cards display.
 */
 
-//! API Keys
-/* 
-    - unique to each user
-    - tied to threshold limits
-*/
+import apiKey from "./key.js"; //* Imports are typically set to the top of the file.
 
-//! Documentation
-/* 
-    - Not all documentation is the same!
-    - Read other documentation such as:
-        - https://github.com/wh-iterabb-it/meowfacts
-        - https://disneyapi.dev/docs
-    - There isn't a required standard but being a clear as possible can make one API easy to use while another very difficult.
-*/
-import apiKey from "./key.js";
+//? Global Variables
 const baseURL = `https://api.spoonacular.com/recipes/random`;
 const buildURL = `${baseURL}/?apiKey=${apiKey}`;
 
 fetch(buildURL)
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(err => console.error(err));
+.then(res => res.json())
+.then(data => console.log(data))
+.catch(err => console.error(err));
+
+//TODO: DOM Elements
+
+//TODO: Display Single Card
+
+//TODO: Display Deck of Cards
+
+//TODO: Event Listener
