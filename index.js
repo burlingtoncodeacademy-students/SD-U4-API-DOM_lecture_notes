@@ -25,7 +25,7 @@ const baseURL = `https://api.spoonacular.com/recipes/random`;
 const buildURL = `${baseURL}/?apiKey=${apiKey}`;
 let storedRecipes = [];
 
-//TODO: DOM Elements
+//* DOM Elements
 const searchForm = document.querySelector('form');
 const randomCard = document.querySelector('.random-card');
 const keptCards = document.getElementById('kept-cards');
@@ -36,7 +36,7 @@ const removeElements = element => {
     }
 }
 
-//TODO: Display Single Card
+//* Display Single Card
 const displayRandomCard = recipe => {
     console.log(recipe);
 
@@ -79,7 +79,7 @@ const displayRandomCard = recipe => {
     randomCard.appendChild(card);
 }
 
-//TODO: Display Deck of Cards
+//* Display Deck of Cards
 const setTable = () => {
     console.log('Stored Recipe Array: ', storedRecipes);
 
