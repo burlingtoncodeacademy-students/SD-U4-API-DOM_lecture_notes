@@ -6,7 +6,7 @@ There are two different branches associated with this lesson.
   - This branch includes all the added notes for you to review and compare with your own code-along.
 
 ### Topics Covered
-- Pulling data
+- Pulling data via Event Listener
 - Building elements and manipulating the DOM.
 
 **NOTE:**
