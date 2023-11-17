@@ -23,16 +23,125 @@ import apiKey from "./key.js"; //* Imports are typically set to the top of the f
 //? Global Variables
 const baseURL = `https://api.spoonacular.com/recipes/random`;
 const buildURL = `${baseURL}/?apiKey=${apiKey}`;
-
-fetch(buildURL)
-.then(res => res.json())
-.then(data => console.log(data))
-.catch(err => console.error(err));
+let storedRecipes = [];
 
 //TODO: DOM Elements
+const searchForm = document.querySelector('form');
+const randomCard = document.querySelector('.random-card');
+const keptCards = document.getElementById('kept-cards');
+
+const removeElements = element => {
+    while(element.firstChild) {
+        element.removeChild(element.firstChild);
+    }
+}
 
 //TODO: Display Single Card
+const displayRandomCard = recipe => {
+    console.log(recipe);
+
+    // while (randomCard.firstChild) {
+    //     randomCard.removeChild(randomCard.firstChild);
+    // }
+
+    removeElements(randomCard);
+
+    //* Create Elements
+    let card = document.createElement('div');
+    let img = document.createElement('img');
+    let body = document.createElement('div');
+    let title = document.createElement('h5');
+    let btn = document.createElement('a');
+
+    //* Set Attributes to Elements
+    card.className = 'card';
+    card.style.width = '18rem';
+    img.src = recipe.image;
+    img.className = 'card-img-top';
+    img.alt = recipe.title;
+    body.className = 'card-body';
+    title.className = 'card-title';
+    title.textContent = recipe.title;
+    btn.className = 'btn btn-primary';
+    btn.textContent = "Add";
+    btn.onclick = () => {
+        storedRecipes.push(recipe);
+        setTable();
+    }
+
+    //* Attach Elements to Parent Elements
+    body.appendChild(title);
+    body.appendChild(btn);
+
+    card.appendChild(img);
+    card.appendChild(body);
+
+    randomCard.appendChild(card);
+}
 
 //TODO: Display Deck of Cards
+const setTable = () => {
+    console.log('Stored Recipe Array: ', storedRecipes);
 
-//TODO: Event Listener
+    removeElements(keptCards);
+
+    storedRecipes.map(obj => {
+
+        //* Create
+        let div = document.createElement('div');
+        let card = document.createElement('div');
+        let img = document.createElement('img');
+        let body = document.createElement('div');
+        let title = document.createElement('h5');
+        let p = document.createElement('p');
+        let a = document.createElement('a');
+
+        //* Attributes
+        div.className = 'col';
+        card.className = 'card';
+        img.className = 'card-img-top';
+        img.src = obj.image; // need obj from array
+        img.alt = obj.title; // need obj from array
+        body.className = 'card-body';
+        title.className = 'card-title';
+        title.textContent = obj.title; // need object
+        p.className = 'card-text';
+        a.href = obj.src; // need obj from array
+        a.target = '_blank';
+        a.textContent = 'Link to Recipe';
+
+        //* Attach
+        p.appendChild(a);
+        body.appendChild(title);
+        body.appendChild(p);
+        card.appendChild(img);
+        card.appendChild(body);
+        div.appendChild(card);
+
+        keptCards.appendChild(div);
+    })
+}
+
+//* Event Listener
+searchForm.addEventListener('submit', e => {
+    e.preventDefault(); // stops our page from refreshing due to default properties of the form.
+
+    fetch(buildURL)
+        .then(res => res.json())
+        .then(data => {
+            // console.log(data.recipes[0]);
+            let recipe = data.recipes[0];
+            // console.log(recipe);
+
+            let obj = {
+                title: recipe.title,
+                image: recipe.image,
+                src: recipe.sourceUrl
+            }
+
+            displayRandomCard(obj);
+        })
+        .catch(err => console.error(err));
+
+})
+
