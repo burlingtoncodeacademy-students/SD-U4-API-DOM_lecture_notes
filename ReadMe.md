@@ -40,3 +40,13 @@ export default apiKey;
 Create an account with the [NY Times API](https://developer.nytimes.com/) and find an endpoint that you would like to work with.
 
 After you have built out a connection to pull data, see about how you can update the HTML doc using some Bootstrap components.
+
+---
+
+See if you can create a function, or update one, that will build out a card and return back the type of card needed depending on where it is displaying.
+
+ex: 
+- If a single card is needed, it will require a button to "Add"
+- If you are display a kept card, it will need that hyperlink to reference the main recipe.
+
+*consider:* conditionals.
